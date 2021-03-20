@@ -41,7 +41,6 @@ def macdAndRsiKlineBuy():
                 close.append(float(entry[4]))
 
         if len(close) > 60:
-            print(x,close[-10:-1])
             cciBuy ,cciSell, invcci = cci(high,low,close)
             macdBuy, signalSell, macd, signal = MACDEMA(close)
             if macdBuy and cciBuy:
@@ -52,7 +51,7 @@ def macdAndRsiKlineBuy():
                 else:
                     break
                 msg = x + "\U0001F4C8 Alış: " + str(round(float(klines[-1][4]),4)).replace(".", ",")
-                #setup.bot.send_message(-1001408874432, msg)
+                setup.bot.send_message(-1001408874432, msg)
                 print(msg)
 
 def buyer():
