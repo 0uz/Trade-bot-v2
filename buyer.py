@@ -41,7 +41,6 @@ def macdAndRsiKlineBuy():
                 close.append(float(entry[4]))
 
         if len(close) > 40:
-            print("al")
             cciBuy ,cciSell, invcci = cci(high,low,close)
             macdBuy, signalSell, macd, signal = MACDEMA(close)
             if macdBuy and cciBuy:

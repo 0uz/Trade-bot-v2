@@ -15,7 +15,6 @@ def macdAndRsiKlineSell():
         close=[]
         klines = client.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
         if len(klines) > 26:
-            print("sat")
             for entry in klines:
                 close.append(float(entry[4]))
             macdBuy, macdSell, macd, signal = MACDEMA(close)
