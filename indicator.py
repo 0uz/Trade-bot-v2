@@ -11,7 +11,7 @@ def RSI(close):
         inv.append((math.exp(2 * entry) - 1) / (math.exp(2 * entry) + 1))
 
     rsiSell = (inv[-2] > 0.5) and (inv[-1] <= 0.5)
-    rsiBuy = (inv[-2] < -0.5) and (inv[-1] >= -0.5)
+    rsiBuy = (inv[-2] < -0.65) and (inv[-1] >= -0.65)
 
     return rsiBuy, rsiSell, round(inv[-1], 2)
 
