@@ -19,6 +19,7 @@ connection = Database.create_connection("test.db")
 def fillSymbols():
     BUY_SYMBOLS.clear()
     data = client.get_symbol_ticker()
+    time.sleep(0.1)
     for x in data:
         if x['symbol'][-4:].find("USDT") !=-1:
             if x['symbol'][:-4].find("USD") ==-1:
@@ -36,6 +37,7 @@ def macdAndRsiKlineBuy():
         low = []
         close=[]
         klines = client.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
+        time.sleep(0.1)
         for entry in klines:
                 high.append(float(entry[2]))
                 low.append(float(entry[3]))

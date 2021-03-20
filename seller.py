@@ -14,6 +14,7 @@ def macdAndRsiKlineSell():
     for x in SYMBOLS:
         close=[]
         klines = client.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+        time.sleep(0.1)
         if len(klines) > 26:
             for entry in klines:
                 close.append(float(entry[4]))
