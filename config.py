@@ -1,2 +1,5 @@
-api_key = 'QEeaYKW1IeK6ARWG6Mv5knQNfF72J6vaJNcY1K1yLrunYzaZphpSMXmvZ6W5NvMQ'
-api_secret='q00OdUIG09NeJnzYkDGMUEbsOsKJJsPm9Icyg3ersi5eC2KlLrjvHpquScKvgEnb'
+api_key1 = 'QEeaYKW1IeK6ARWG6Mv5knQNfF72J6vaJNcY1K1yLrunYzaZphpSMXmvZ6W5NvMQ'
+api_secret1='q00OdUIG09NeJnzYkDGMUEbsOsKJJsPm9Icyg3ersi5eC2KlLrjvHpquScKvgEnb'
+
+api_key2 = '3ncPd55wjGxwCYO5zcCXn82ApXG0Ln8OcwBoWVhhfeZ8LKbdg30wi0LzvryawpFb'
+api_secret2 = 'BvPrqo3gEZLDHXS7Ex18e0lwHclM3HMYz0xdnoWr0SaMlkUyYxUSTZLiQI4PLVp3'
