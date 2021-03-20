@@ -104,7 +104,6 @@ def macdAndRsiKlineBuy():
         if len(close) > 40:
             cciBuy ,cciSell, invcci = cci(high,low,close)
             macdBuy, signalSell, macd, signal = MACDEMA(close)
-            print(x,klines[-1])
             if macdBuy and cciBuy:
                 if Database.count_open_orders(connection)<10 and (not Database.isExist(connection,x)):
                     stop = stopCalculator(high,low,close)
@@ -124,7 +123,6 @@ def macdAndRsiKlineSell():
         if len(klines) > 26:
             for entry in klines:
                 close.append(float(entry[4]))
-            print(x[1],klines[-1])
             macdBuy, macdSell, macd, signal = MACDEMA(close)
             stop = close[-1] < x[2]
             if macdSell:
