@@ -9,7 +9,7 @@ from indicator import stopCalculator
 import setup
 
 TIME = "1 month ago UTC+3"
-BLACKLIST = ['DOWN','UP','TUSDUSDT','VITEUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC',"USDC"]
+BLACKLIST = ['DOWN','UP','TUSDUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY',]
 BUY_SYMBOLS = []
 client = Client(config.api_key1, config.api_secret1)
 connection = Database.create_connection("test.db")
@@ -19,14 +19,15 @@ def fillSymbols():
     BUY_SYMBOLS.clear()
     data = client.get_symbol_ticker()
     for x in data:
-        if x['symbol'][-4:] == 'USDT':
-            for a in BLACKLIST:
-                allOf = True
-                if x['symbol'].find(a)!=-1:
-                    allOf=False
-                    break
-            if allOf:
-                BUY_SYMBOLS.append(x['symbol'])
+        if x['symbol'][-4:].find("USDT") !=-1:
+            if x['symbol'][:-4].find("USD") ==-1:
+                for a in BLACKLIST:
+                    allOf = True
+                    if x['symbol'].find(a)!=-1:
+                        allOf=False
+                        break
+                if allOf:
+                    BUY_SYMBOLS.append(x['symbol'])
 
 def macdAndRsiKlineBuy():
     for x in BUY_SYMBOLS:
@@ -35,12 +36,12 @@ def macdAndRsiKlineBuy():
         close=[]
         klines = client.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
         for entry in klines:
-            if entry != numpy.NaN:
                 high.append(float(entry[2]))
                 low.append(float(entry[3]))
                 close.append(float(entry[4]))
 
-        if len(close) > 40:
+        if len(close) > 60:
+            print(x,close[-10:-1])
             cciBuy ,cciSell, invcci = cci(high,low,close)
             macdBuy, signalSell, macd, signal = MACDEMA(close)
             if macdBuy and cciBuy:
@@ -51,7 +52,7 @@ def macdAndRsiKlineBuy():
                 else:
                     break
                 msg = x + "\U0001F4C8 Alış: " + str(round(float(klines[-1][4]),4)).replace(".", ",")
-                setup.bot.send_message(-1001408874432, msg)
+                #setup.bot.send_message(-1001408874432, msg)
                 print(msg)
 
 def buyer():
