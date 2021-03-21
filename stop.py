@@ -1,7 +1,5 @@
-import talib
 import Database
 import config
-import numpy
 import time
 from binance.client import Client
 from indicator import stopCalculator
@@ -40,5 +38,4 @@ def stopTracker():
             stopsUpdate()
             time.sleep(3600)
         else:
-            print("stop uyuyor")
             time.sleep(30)

@@ -17,7 +17,7 @@ def handle_command(message):
 
 @setup.bot.message_handler(commands=['stop'])
 def handle_command(message):
-    markup = types.ReplyKeyboardMarkup(row_width=2)
+    markup = types.ReplyKeyboardMarkup(row_width=2,one_time_keyboard=True)
     symbols = Database.getOpenOrder(connection)
     if len(symbols) >0:
         for x in symbols:
@@ -25,7 +25,8 @@ def handle_command(message):
             markup.add(itembtn1)
         setup.bot.send_message(message.chat.id, "Coin seç: ", reply_markup=markup)
     else:
-        setup.bot.send_message(message.chat.id, "Alış gerçekleşmemiş", reply_markup=markup)
+        setup.bot.send_message(message.chat.id, "Alış gerçekleşmemiş")
+
 @setup.bot.message_handler()
 def handle_all_message(message):
     setup.bot.send_message(message.chat.id,Database.stopTele(connection,message.text))

@@ -3,7 +3,7 @@ import numpy
 import math
 
 def RSI(close):
-    rsi = talib.RSI(numpy.asarray(close), timeperiod=21)
+    rsi = talib.RSI(numpy.asarray(close), timeperiod=13)
     v1 = 0.1 * (rsi - 50)
     v2 = talib.WMA(numpy.asarray(v1), timeperiod=9)
     inv = []

@@ -15,17 +15,17 @@ if __name__ == '__main__':
     buy = Process(target=buyer.buyer)
     sell = Process(target=seller.seller)
     stops = Process(target=stop.stopTracker)
-    tele = Process(target=telegram.pool)
+    tele = Thread(target=telegram.pool)
     drive = Process(target=googleDrive.upload)
 
     buy.start()
     sell.start()
     stops.start()
-    tele.start()
     drive.start()
 
     buy.join()
     sell.join()
     stops.join()
-    tele.join()
     drive.join()
+    
+    tele.start()
