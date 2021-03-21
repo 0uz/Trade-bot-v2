@@ -84,12 +84,12 @@ def profitTele(conn):
     if len(rows)==0: return "Satış gerçekleşmemiş"
     for x in rows:
         prof = (((x[2]*100)/x[1])-100)
-        alis = str(x[1]).replace(".", ",").replace('-','\\-')
-        satis = str(x[2]).replace(".", ",").replace('-','\\-')
+        alis = str(x[1]).replace(".", "\\.").replace('-','\\-')
+        satis = str(x[2]).replace(".", "\\.").replace('-','\\-')
         if prof>0:
-            message += str(x[0]) +" %"+str(prof).replace(".", ",").replace('-','\\-')+" \U0001F4C8\n Alış: "+alis+"\nSatiş: "+satis+"\n"
+            message += str(x[0]) +" %"+str(prof).replace(".", "\\.").replace('-','\\-')+" \U0001F4C8\n Alış: "+alis+"\nSatiş: "+satis+"\n"
         else:
-            message += str(x[0]) +" %"+str(prof).replace(".", ",").replace('-','\\-')+" \U0001F4C9\n Alış: "+alis+"\nSatiş: "+satis+"\n"
+            message += str(x[0]) +" %"+str(prof).replace(".", "\\.").replace('-','\\-')+" \U0001F4C9\n Alış: "+alis+"\nSatiş: "+satis+"\n"
     return message
 
 def stopTele(conn,symbol):
@@ -99,8 +99,8 @@ def stopTele(conn,symbol):
     message=""
     if len(rows)==0: return "\U0001F4C8"
     for x in rows:
-        alis = str(x[1]).replace(".", ",").replace('-','\\-')
-        stop = str(x[2]).replace(".", ",").replace('-','\\-')
+        alis = str(x[1]).replace(".", "\\.").replace('-','\\-')
+        stop = str(x[2]).replace(".", "\\.").replace('-','\\-')
         message += str(x[0]) +"\nAlış: "+alis+"\nStop: "+stop+"\n"
     return message 
 
