@@ -59,9 +59,7 @@ def uploadFile():
         'name' : file_name,
         'parents': [folderID],
     }
-
     upload = MediaFileUpload('test.db',mimetype=mime_type)
-
     service.files().create(body=file_metadata,media_body=upload,fields='id').execute()
 
 def upload():

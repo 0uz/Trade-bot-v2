@@ -70,12 +70,6 @@ def isExist(conn, symbol):
     rows = cur.fetchall()
     return len(rows)>0
 
-def findStops(conn,currPrice):
-    cur = conn.cursor()
-    cur.execute("SELECT id,symbol FROM orders where ? <= stopPrice",(currPrice,))
-    rows = cur.fetchall()
-
-
 def delete_all_orders(conn):
     sql = 'DELETE FROM orders'
     cur = conn.cursor()
@@ -89,11 +83,13 @@ def profitTele(conn):
     message=""
     if len(rows)==0: return "Satış gerçekleşmemiş"
     for x in rows:
-        prof = round((((x[2]*100)/x[1])-100),2)
+        prof = (((x[2]*100)/x[1])-100)
+        alis = str(x[1]).replace(".", ",").replace('-','\\-')
+        satis = str(x[2]).replace(".", ",").replace('-','\\-')
         if prof>0:
-            message += str(x[0]) +" %"+str(prof).replace(".", ",")+" \U0001F4C8\n Alış: "+str(round(x[1],4)).replace(".", ",")+"\nSatiş: "+str(round(x[2],4)).replace(".", ",")+"\n"
+            message += str(x[0]) +" %"+str(prof).replace(".", ",").replace('-','\\-')+" \U0001F4C8\n Alış: "+alis+"\nSatiş: "+satis+"\n"
         else:
-            message += str(x[0]) +" %"+str(prof).replace(".", ",")+" \U0001F4C9\n Alış: "+str(round(x[1],4)).replace(".", ",")+"\nSatiş: "+str(round(x[2],4)).replace(".", ",")+"\n"
+            message += str(x[0]) +" %"+str(prof).replace(".", ",").replace('-','\\-')+" \U0001F4C9\n Alış: "+alis+"\nSatiş: "+satis+"\n"
     return message
 
 def stopTele(conn,symbol):
@@ -103,7 +99,9 @@ def stopTele(conn,symbol):
     message=""
     if len(rows)==0: return "\U0001F4C8"
     for x in rows:
-        message += str(x[0]) +"\nAlış: "+str(round(x[1],4)).replace(".", ",")+"\nStop: "+str(round(x[2],4)).replace(".", ",")+"\n"
+        alis = str(x[1]).replace(".", ",").replace('-','\\-')
+        stop = str(x[2]).replace(".", ",").replace('-','\\-')
+        message += str(x[0]) +"\nAlış: "+alis+"\nStop: "+stop+"\n"
     return message 
 
 sql_create_table = """CREATE TABLE IF NOT EXISTS orders(

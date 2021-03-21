@@ -53,7 +53,7 @@ def macdAndRsiKlineBuy():
                     Database.create_buy_order(connection,order)
                 else:
                     break
-                msg = x + "\U0001F4C8 Alış: " + str(round(float(klines[-1][4]),4)).replace(".", ",")
+                msg = x + " \U0001F4C8\nAlış: " + str(round(float(klines[-1][4]),8)).replace(".", ",").replace('-','\\-') + "\nStop: " + str(stop)
                 setup.bot.send_message(-1001408874432, msg)
                 print(msg)
 
@@ -64,4 +64,4 @@ def buyer():
         if Database.count_open_orders(connection)<10:
             macdAndRsiKlineBuy()
         else:
-            time.sleep(10)
+            time.sleep(60)

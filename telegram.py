@@ -2,6 +2,7 @@ import Database
 import setup
 import telebot
 from telebot import types
+from googleDrive import uploadFile
 connection = Database.create_connection("test.db")
 print("Telegram is working...")
 
@@ -29,7 +30,11 @@ def handle_command(message):
 
 @setup.bot.message_handler()
 def handle_all_message(message):
-    setup.bot.send_message(message.chat.id,Database.stopTele(connection,message.text))
+    if message.text == "oguzhan-backup-db":
+        uploadFile()
+        setup.bot.send_message(message.chat.id,"Backup alindi")
+    else:
+        setup.bot.send_message(message.chat.id,Database.stopTele(connection,message.text))
 
 def pool():
     setup.bot.polling()

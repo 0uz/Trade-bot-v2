@@ -31,7 +31,7 @@ def MACDEMA(close):
     Lignesignal = ((2 * MMEsignala) - MMEsignalb)
 
     macdBuy = LigneMACD[-2] < Lignesignal[-2] and LigneMACD[-1] >= Lignesignal[-1]
-    macdSell = LigneMACD[-2] > Lignesignal[-2] and LigneMACD[-1] <= Lignesignal[-1]
+    macdSell = LigneMACD[-3] > Lignesignal[-3] and LigneMACD[-2] > Lignesignal[-2] and LigneMACD[-1] <= Lignesignal[-1]
     return macdBuy,macdSell, round(LigneMACD[-1],2), round(Lignesignal[-1],2)
 
 def cci(high, low, close):
@@ -49,4 +49,4 @@ def cci(high, low, close):
 def stopCalculator(high,low,close):
     atr = talib.ATR(numpy.asarray(high),numpy.asarray(low),numpy.asarray(close), timeperiod=14)
     stop = close[-1]-(3*atr[-1])
-    return round(stop,2)
+    return round(stop,8)

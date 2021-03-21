@@ -23,9 +23,8 @@ def stopsUpdate():
         
         if close[-1] > Database.getLastPrice(connection,x[0]):
             stopPrice =stopCalculator(high,low,close)
-            order = (round(stopPrice,2),x[0],close[-1])
+            order = (stopPrice,x[0],close[-1])
             Database.updateStopPrice(connection,order)
-            print(x[1],"Stoplar Updatelendi")
 
 
 
@@ -38,4 +37,4 @@ def stopTracker():
             stopsUpdate()
             time.sleep(3600)
         else:
-            time.sleep(30)
+            time.sleep(60)
