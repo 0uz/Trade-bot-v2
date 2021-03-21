@@ -38,6 +38,7 @@ def macdAndRsiKlineBuy():
         close=[]
         klines = client.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
         time.sleep(0.1)
+        print(x)
         for entry in klines:
                 high.append(float(entry[2]))
                 low.append(float(entry[3]))

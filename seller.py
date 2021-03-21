@@ -40,4 +40,5 @@ def seller():
         if Database.count_open_orders(connection) > 0:
             macdAndRsiKlineSell()
         else:
+            print("seller uyuyor")
             time.sleep(20)

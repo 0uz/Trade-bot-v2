@@ -40,4 +40,5 @@ def stopTracker():
             stopsUpdate()
             time.sleep(3600)
         else:
+            print("stop uyuyor")
             time.sleep(30)
