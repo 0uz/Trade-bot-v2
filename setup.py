@@ -18,14 +18,15 @@ if __name__ == '__main__':
     tele = Thread(target=telegram.pool)
     drive = Process(target=googleDrive.upload)
 
+    tele.start()
     buy.start()
     sell.start()
     stops.start()
     drive.start()
-
+    
     buy.join()
     sell.join()
     stops.join()
     drive.join()
     
-    tele.start()
+ 
