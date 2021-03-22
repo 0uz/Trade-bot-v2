@@ -145,11 +145,11 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS orders(
 
 drop_table = """DROP TABLE orders"""
 
-con = create_connection("test.db")
+#con = create_connection("test.db")
 #create_buy_order(con,order)
 #create_table(con,drop_table)
 #create_table(con,sql_create_table)
 #findStops(con,12)
 #delete_all_orders(con)
 
-print(profitTele(con))
+#print(profitTele(con))
