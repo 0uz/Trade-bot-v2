@@ -9,7 +9,7 @@ from indicator import stopCalculator
 import setup
 
 TIME = "1 month ago UTC+3"
-BLACKLIST = ['DOWN','UP','TUSDUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY',]
+BLACKLIST = ['DOWN','UP','TUSDUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT']
 BUY_SYMBOLS = []
 client = Client(config.api_key1, config.api_secret1)
 connection = Database.create_connection("test.db")

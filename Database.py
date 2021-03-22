@@ -87,9 +87,23 @@ def profitTele(conn):
         alis = str(x[1]).replace(".", "\\.").replace('-','\\-')
         satis = str(x[2]).replace(".", "\\.").replace('-','\\-')
         if prof>0:
-            message += str(x[0]) +" %"+str(prof).replace(".", "\\.").replace('-','\\-')+" \U0001F4C8\n Alış: "+alis+"\nSatiş: "+satis+"\n"
+            message += str(x[0]) +" %"+str(prof).replace(".", "\\.").replace('-','\\-')+" \U0001F4C8\nAlış: "+alis+"\nSatiş: "+satis+"\n"
         else:
-            message += str(x[0]) +" %"+str(prof).replace(".", "\\.").replace('-','\\-')+" \U0001F4C9\n Alış: "+alis+"\nSatiş: "+satis+"\n"
+            message += str(x[0]) +" %"+str(prof).replace(".", "\\.").replace('-','\\-')+" \U0001F4C9\nAlış: "+alis+"\nSatiş: "+satis+"\n"
+    return message
+
+def profitCalc(conn,id):
+    cur = conn.cursor()
+    cur.execute('SELECT openPrice,closePrice FROM orders where id = ?',(id,))
+    rows = cur.fetchall()
+    message=""
+    if len(rows)==0: return " "
+    for x in rows:
+        prof = round((((x[1]*100)/x[0])-100),4)
+        if prof>0:
+            message = " %"+str(prof).replace(".", "\\.").replace('-','\\-')
+        else:
+            message = " %"+str(prof).replace(".", "\\.").replace('-','\\-')
     return message
 
 def stopTele(conn,symbol):

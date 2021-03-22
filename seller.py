@@ -23,13 +23,13 @@ def macdAndRsiKlineSell():
             if macdSell:
                 order = (klines[-1][4],klines[-1][0],x[0])
                 Database.sellOrder(connection,order)
-                msg = x[1] + "\U0001F4B0 Satiş: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.")
+                msg = x[1] + "\U0001F4B0 Satiş: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.") + Database.profitCalc(connection,x[0])
                 setup.bot.send_message(-1001408874432, msg)
                 print(msg)
             if stop:
                 order = (klines[-1][4],klines[-1][0],x[0])
                 Database.sellOrder(connection,order)
-                msg = x[1]+ "\U0001F534 Stop: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.")
+                msg = x[1]+ "\U0001F534 Stop: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.") + Database.profitCalc(connection,x[0])
                 setup.bot.send_message(-1001408874432, msg)
                 print(msg)
 
