@@ -1,10 +1,14 @@
 import Database
 import setup
-import telebot
 from telebot import types
 from googleDrive import uploadFile
 connection = Database.create_connection("test.db")
 print("Telegram is working...")
+
+@setup.bot.message_handler(commands=['allTrades'])
+def handle_command(message):
+    msg = Database.allTradeTele(connection)
+    setup.bot.send_message(message.chat.id, msg)
 
 @setup.bot.message_handler(commands=['profit'])
 def handle_command(message):

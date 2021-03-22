@@ -76,7 +76,7 @@ def delete_all_orders(conn):
     cur.execute(sql)
     conn.commit()
 
-def profitTele(conn):
+def allTradeTele(conn):
     cur = conn.cursor()
     cur.execute('SELECT symbol,openPrice,closePrice FROM orders where selled = 1')
     rows = cur.fetchall()
@@ -91,6 +91,17 @@ def profitTele(conn):
         else:
             message += str(x[0]) +" %"+str(prof).replace(".", "\\.").replace('-','\\-')+" \U0001F4C9\nAlış: "+alis+"\nSatiş: "+satis+"\n"
     return message
+
+def profitTele(conn):
+    cur = conn.cursor()
+    cur.execute('SELECT symbol,openPrice,closePrice FROM orders where selled = 1')
+    rows = cur.fetchall()
+    if len(rows)==0: return "Satış gerçekleşmemiş"
+    totalProf = 0
+    for x in rows:
+        totalProf += ((x[2]*100)/x[1])-100
+
+    return str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
 
 def profitCalc(conn,id):
     cur = conn.cursor()
@@ -132,9 +143,11 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS orders(
 
 drop_table = """DROP TABLE orders"""
 
-#con = create_connection("test.db")
+con = create_connection("test.db")
 #create_buy_order(con,order)
 #create_table(con,drop_table)
 #create_table(con,sql_create_table)
 #findStops(con,12)
 #delete_all_orders(con)
+
+print(profitTele(con))
