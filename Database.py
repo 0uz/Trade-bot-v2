@@ -101,9 +101,9 @@ def profitTele(conn):
     for x in rows:
         totalProf += ((x[2]*100)/x[1])-100
     if totalProf > 0:
-        return "\U00002B06 Toplam kar: " + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
+        return "\U00002B06 Toplam kar: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
     else:
-        return "\U00002B07 Toplam kar: " + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
+        return "\U00002B07 Toplam kar: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
 
 def profitCalc(conn,id):
     cur = conn.cursor()
