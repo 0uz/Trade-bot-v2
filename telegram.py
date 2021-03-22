@@ -30,7 +30,7 @@ def handle_command(message):
 
 @setup.bot.message_handler()
 def handle_all_message(message):
-    if message.text == "oguzhan-backup-db":
+    if message.text == "oguzhan-backup-db" and message.chat.id == 923698949:
         uploadFile()
         setup.bot.send_message(message.chat.id,"Backup alindi")
     else:
