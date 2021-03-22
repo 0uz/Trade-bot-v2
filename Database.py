@@ -83,7 +83,7 @@ def profitTele(conn):
     message=""
     if len(rows)==0: return "Satış gerçekleşmemiş"
     for x in rows:
-        prof = (((x[2]*100)/x[1])-100)
+        prof = round((((x[2]*100)/x[1])-100),4)
         alis = str(x[1]).replace(".", "\\.").replace('-','\\-')
         satis = str(x[2]).replace(".", "\\.").replace('-','\\-')
         if prof>0:
