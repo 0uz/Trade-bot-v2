@@ -1,6 +1,7 @@
 import Database
 import setup
 from telebot import types
+from telebot import util
 from googleDrive import uploadFile
 connection = Database.create_connection("test.db")
 print("Telegram is working...")
@@ -8,7 +9,9 @@ print("Telegram is working...")
 @setup.bot.message_handler(commands=['allTrades'])
 def handle_command(message):
     msg = Database.allTradeTele(connection)
-    setup.bot.send_message(message.chat.id, msg)
+    splitted_text = util.split_string(msg, 3000)
+    for text in splitted_text:
+        setup.bot.send_message(message.chat.id, text)
 
 @setup.bot.message_handler(commands=['profit'])
 def handle_command(message):

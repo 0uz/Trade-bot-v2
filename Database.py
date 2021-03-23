@@ -78,7 +78,7 @@ def delete_all_orders(conn):
 
 def allTradeTele(conn):
     cur = conn.cursor()
-    cur.execute('SELECT symbol,openPrice,closePrice FROM orders where selled = 1 ORDER BY id DESC LIMIT 10')
+    cur.execute('SELECT symbol,openPrice,closePrice FROM orders where selled = 1 ORDER BY id DESC')
     rows = cur.fetchall()
     message=""
     if len(rows)==0: return "Satış gerçekleşmemiş"
