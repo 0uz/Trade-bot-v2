@@ -30,8 +30,8 @@ def MACDEMA(close):
     MMEsignalb = talib.EMA(MMEsignala, timeperiod=13)
     Lignesignal = ((2 * MMEsignala) - MMEsignalb)
 
-    macdBuy = LigneMACD[-3] < Lignesignal[-3] and LigneMACD[-2] < Lignesignal[-2] and LigneMACD[-1] >= Lignesignal[-1]
-    macdSell = LigneMACD[-3] > Lignesignal[-3] and LigneMACD[-2] > Lignesignal[-2] and LigneMACD[-1] <= Lignesignal[-1]
+    macdBuy = LigneMACD[-2] < Lignesignal[-2] and LigneMACD[-1] >= Lignesignal[-1]
+    macdSell =LigneMACD[-2] > Lignesignal[-2] and LigneMACD[-1] <= Lignesignal[-1]
     return macdBuy,macdSell, round(LigneMACD[-1],2), round(Lignesignal[-1],2)
 
 def cci(high, low, close):
