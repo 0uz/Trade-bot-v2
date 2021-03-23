@@ -3,7 +3,6 @@ from binance.client import Client
 import config
 import time
 from indicator import MACDEMA
-from indicator import cci
 from indicator import RSI
 from indicator import stopCalculator
 import setup
