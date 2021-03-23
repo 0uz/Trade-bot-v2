@@ -100,6 +100,7 @@ def profitTele(conn):
     totalProf = 0
     for x in rows:
         totalProf += ((x[2]*100)/x[1])-100
+    totalProf = totalProf/len(rows)
     if totalProf > 0:
         return "\U00002B06 Toplam kar: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
     else:
