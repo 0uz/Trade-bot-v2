@@ -7,14 +7,14 @@ from indicator import RSI
 import setup
 
 connection = Database.create_connection("test.db")
-client = Client(config.api_key2, config.api_secret2)
+client2 = Client(config.api_key2, config.api_secret2)
 TIME = "1 month ago UTC+3"
 
 def macdAndRsiKlineSell():
     SYMBOLS = Database.getOpenOrder(connection)
     for x in SYMBOLS:
         close=[]
-        klines = client.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+        klines = client2.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
         time.sleep(0.1)
         if len(klines) > 26:
             for entry in klines:

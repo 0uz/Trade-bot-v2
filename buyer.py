@@ -11,13 +11,13 @@ import setup
 TIME = "1 month ago UTC+3"
 BLACKLIST = ['DOWN','UP','TUSDUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT']
 BUY_SYMBOLS = []
-client = Client(config.api_key1, config.api_secret1)
+client1 = Client(config.api_key1, config.api_secret1)
 connection = Database.create_connection("test.db")
 
 
 def fillSymbols():
     BUY_SYMBOLS.clear()
-    data = client.get_symbol_ticker()
+    data = client1.get_symbol_ticker()
     time.sleep(0.1)
     for x in data:
         if x['symbol'][-4:].find("USDT") !=-1:
@@ -35,7 +35,7 @@ def macdAndRsiKlineBuy():
         high =[]
         low = []
         close=[]
-        klines = client.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
+        klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
         time.sleep(0.1)
         for entry in klines:
                 high.append(float(entry[2]))

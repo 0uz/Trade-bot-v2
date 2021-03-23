@@ -3,3 +3,6 @@ api_secret1='q00OdUIG09NeJnzYkDGMUEbsOsKJJsPm9Icyg3ersi5eC2KlLrjvHpquScKvgEnb'
 
 api_key2 = '3ncPd55wjGxwCYO5zcCXn82ApXG0Ln8OcwBoWVhhfeZ8LKbdg30wi0LzvryawpFb'
 api_secret2 = 'BvPrqo3gEZLDHXS7Ex18e0lwHclM3HMYz0xdnoWr0SaMlkUyYxUSTZLiQI4PLVp3'
+
+api_key3 = '6Am7F68E0qpXWsAzpRqPFddhc26OdAPbq8ZPkMAWbJzVUwq4My8A5FaEypOYgtmp'
+api_secret3 = 'LO54QOceT5Jcypt5QUnSHiNVRozkSi0e3GRigGjuub6wEnkW2WO95jWXKEFrvqYi'

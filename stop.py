@@ -5,7 +5,7 @@ from binance.client import Client
 from indicator import stopCalculator
 
 connection = Database.create_connection("test.db")
-client = Client(config.api_key2, config.api_secret2)
+client3 = Client(config.api_key3, config.api_secret3)
 TIME = "1 month ago UTC+3"
 
 def stopsUpdate():
@@ -14,7 +14,7 @@ def stopsUpdate():
         high =[]
         low = []
         close=[]
-        klines = client.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+        klines = client3.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
         time.sleep(0.1)
         for entry in klines:
             high.append(float(entry[2]))
