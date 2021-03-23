@@ -10,8 +10,8 @@ def RSI(close):
     for entry in v2:
         inv.append((math.exp(2 * entry) - 1) / (math.exp(2 * entry) + 1))
 
-    rsiSell = (inv[-2] > 0.5) and (inv[-1] <= 0.5)
-    rsiBuy = (inv[-2] < -0.65) and (inv[-1] >= -0.65)
+    rsiSell = (inv[-1] >= 0)
+    rsiBuy = (inv[-2] < -0.7) and (inv[-1] >= -0.7)
 
     return rsiBuy, rsiSell, round(inv[-1], 2)
 
@@ -26,11 +26,11 @@ def MACDEMA(close):
 
     LigneMACD = DEMAfast - DEMAslow
 
-    MMEsignala = talib.EMA(LigneMACD, timeperiod=9)
-    MMEsignalb = talib.EMA(MMEsignala, timeperiod=9)
+    MMEsignala = talib.EMA(LigneMACD, timeperiod=13)
+    MMEsignalb = talib.EMA(MMEsignala, timeperiod=13)
     Lignesignal = ((2 * MMEsignala) - MMEsignalb)
 
-    macdBuy = LigneMACD[-2] < Lignesignal[-2] and LigneMACD[-1] >= Lignesignal[-1]
+    macdBuy = LigneMACD[-3] < Lignesignal[-3] and LigneMACD[-2] < Lignesignal[-2] and LigneMACD[-1] >= Lignesignal[-1]
     macdSell = LigneMACD[-3] > Lignesignal[-3] and LigneMACD[-2] > Lignesignal[-2] and LigneMACD[-1] <= Lignesignal[-1]
     return macdBuy,macdSell, round(LigneMACD[-1],2), round(Lignesignal[-1],2)
 
@@ -48,5 +48,5 @@ def cci(high, low, close):
 
 def stopCalculator(high,low,close):
     atr = talib.ATR(numpy.asarray(high),numpy.asarray(low),numpy.asarray(close), timeperiod=14)
-    stop = close[-1]-(3*atr[-1])
+    stop = close[-1]-(3.5*atr[-1])
     return round(stop,8)
