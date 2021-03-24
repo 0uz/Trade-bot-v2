@@ -1,3 +1,4 @@
+import numpy
 import Database
 from binance.client import Client
 import config
@@ -8,7 +9,7 @@ from indicator import stopCalculator
 import setup
 
 TIME = "1 month ago UTC+3"
-BLACKLIST = ['DOWN','UP','TUSDUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT','BEAR','BULL']
+BLACKLIST = ['DOWN','UP','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT','BEAR','BULL']
 BUY_SYMBOLS = []
 client1 = Client(config.api_key1, config.api_secret1)
 connection = Database.create_connection("test.db")
@@ -37,10 +38,10 @@ def macdAndRsiKlineBuy():
         klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
         time.sleep(0.2)
         for entry in klines:
-                high.append(float(entry[2]))
-                low.append(float(entry[3]))
-                close.append(float(entry[4]))
-        if len(close) > 60:
+            high.append(float(entry[2]))
+            low.append(float(entry[3]))
+            close.append(float(entry[4]))
+        if len(close) > 65:
             #cciBuy ,cciSell, invcci = cci(high,low,close)
             rsiBuy,rsiSell, invRsi = RSI(close)
             macdBuy, signalSell, macd, signal = MACDEMA(close)
