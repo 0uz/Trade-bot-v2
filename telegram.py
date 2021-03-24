@@ -15,6 +15,11 @@ def handle_command(message):
 
 @setup.bot.message_handler(commands=['profit'])
 def handle_command(message):
+    msg = Database.profit24HTele()(connection)
+    setup.bot.send_message(message.chat.id, msg)
+
+@setup.bot.message_handler(commands=['totalprofit'])
+def handle_command(message):
     msg = Database.profitTele(connection)
     setup.bot.send_message(message.chat.id, msg)
 

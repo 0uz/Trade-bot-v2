@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 from sqlite3.dbapi2 import connect
+import time
 
 def create_connection(db_file):
     conn = None
@@ -102,9 +103,27 @@ def profitTele(conn):
         totalProf += ((x[2]*100)/x[1])-100
     totalProf = totalProf/len(rows)
     if totalProf > 0:
-        return "\U00002B06 Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
+        return "\U00002B06Toplam Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
     else:
-        return "\U00002B07 Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
+        return "\U00002B07Toplam Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
+
+def profit24HTele(conn):
+    cur = conn.cursor()
+    cur.execute('SELECT symbol,openPrice,closePrice,closeTime FROM orders where selled = 1')
+    rows = cur.fetchall()
+    if len(rows)==0: return "Satış gerçekleşmemiş"
+    totalProf = 0
+    rowCount = 0
+    for x in rows:
+        if x[3]/1000 > time.time()-86400:
+            totalProf += ((x[2]*100)/x[1])-100
+            rowCount+=1
+            print(x[0])
+    totalProf = totalProf/rowCount
+    if totalProf > 0:
+        return "\U00002B061 Günlük Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
+    else:
+        return "\U00002B071 Günlük Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
 
 def profitCalc(conn,id):
     cur = conn.cursor()
@@ -146,11 +165,11 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS orders(
 
 drop_table = """DROP TABLE orders"""
 
-#con = create_connection("test.db")
+con = create_connection("test.db")
 #create_buy_order(con,order)
 #create_table(con,drop_table)
 #create_table(con,sql_create_table)
 #findStops(con,12)
 #delete_all_orders(con)
 
-#print(profitTele(con))
+print(profit24HTele(con))
