@@ -8,7 +8,7 @@ from indicator import stopCalculator
 import setup
 
 TIME = "1 month ago UTC+3"
-BLACKLIST = ['DOWN','UP','TUSDUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT']
+BLACKLIST = ['DOWN','UP','TUSDUSDT','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT','BEAR','BULL']
 BUY_SYMBOLS = []
 client1 = Client(config.api_key1, config.api_secret1)
 connection = Database.create_connection("test.db")
@@ -16,7 +16,7 @@ connection = Database.create_connection("test.db")
 
 def fillSymbols():
     BUY_SYMBOLS.clear()
-    data = client1.get_symbol_ticker()
+    data = client1.get_all_tickers()
     time.sleep(0.1)
     for x in data:
         if x['symbol'][-4:].find("USDT") !=-1:
@@ -40,7 +40,7 @@ def macdAndRsiKlineBuy():
                 high.append(float(entry[2]))
                 low.append(float(entry[3]))
                 close.append(float(entry[4]))
-
+        print(x)
         if len(close) > 60:
             #cciBuy ,cciSell, invcci = cci(high,low,close)
             rsiBuy,rsiSell, invRsi = RSI(close)
