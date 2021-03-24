@@ -40,7 +40,6 @@ def macdAndRsiKlineBuy():
                 high.append(float(entry[2]))
                 low.append(float(entry[3]))
                 close.append(float(entry[4]))
-        print(x)
         if len(close) > 60:
             #cciBuy ,cciSell, invcci = cci(high,low,close)
             rsiBuy,rsiSell, invRsi = RSI(close)
