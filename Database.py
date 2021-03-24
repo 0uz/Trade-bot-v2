@@ -165,6 +165,8 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS orders(
 drop_table = """DROP TABLE orders"""
 
 #con = create_connection("test.db")
+#order = (0.55017,1616599108,60)
+#sellOrder(con,order)
 #create_buy_order(con,order)
 #create_table(con,drop_table)
 #create_table(con,sql_create_table)
