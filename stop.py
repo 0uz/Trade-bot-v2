@@ -4,26 +4,26 @@ import config
 import time
 from binance.client import Client
 from indicator import stopCalculator
-from buyer import client1
+
 
 connection = Database.create_connection("test.db")
+client3 = Client(config.api_key3, config.api_secret3)
 TIME = "1 month ago UTC+3"
 
 def stopsUpdate():
     SYMBOLS = Database.getOpenOrder(connection)
-    global client1
+    global client3
     for x in SYMBOLS:
         high =[]
         low = []
         close=[]
         try:
-            klines = client1.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
-            time.sleep(0.3)
+            klines = client3.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+            time.sleep(0.2)
         except BinanceAPIException as e:
-            print(e)
             print('Something went wrong')
             time.sleep(60)
-            client1 = Client(config.api_key1, config.api_secret1)
+            client3 = Client(config.api_key1, config.api_secret1)
             continue
         for entry in klines:
             high.append(float(entry[2]))

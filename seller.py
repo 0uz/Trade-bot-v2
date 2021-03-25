@@ -5,24 +5,23 @@ import config
 import time
 from indicator import MACDEMA
 import setup
-from buyer import client1
-connection = Database.create_connection("test.db")
 
+connection = Database.create_connection("test.db")
+client2 = Client(config.api_key2, config.api_secret2)
 TIME = "1 month ago UTC+3"
 
 def macdAndRsiKlineSell():
-    SYMBOLS = Database.getOpenOrder(connection) 
-    global client1
+    SYMBOLS = Database.getOpenOrder(connection)
+    global client2 
     for x in SYMBOLS:
         close=[]
         try:
-            klines = client1.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
-            time.sleep(0.3)
+            klines = client2.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+            time.sleep(0.2)
         except BinanceAPIException as e:
-            print(e)
             print('Something went wrong')
             time.sleep(60)
-            client1 = Client(config.api_key1, config.api_secret1)
+            client2 = Client(config.api_key1, config.api_secret1)
             continue
         if len(klines) > 26:
             for entry in klines:
