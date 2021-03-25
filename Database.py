@@ -67,7 +67,7 @@ def sellOrder(conn, sellOrder):
 
 def isExist(conn, symbol):
     cur = conn.cursor()
-    cur.execute("SELECT symbol FROM orders where symbol = ?",(symbol,))
+    cur.execute("SELECT symbol FROM orders where symbol = ? and selled = 0",(symbol,))
     rows = cur.fetchall()
     return len(rows)>0
 
@@ -165,7 +165,7 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS orders(
 drop_table = """DROP TABLE orders"""
 
 #con = create_connection("test.db")
-#order = (0.55017,1616599108,60)
+#order = (0.0103499,1616635108,76)
 #sellOrder(con,order)
 #create_buy_order(con,order)
 #create_table(con,drop_table)

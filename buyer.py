@@ -10,7 +10,7 @@ from indicator import RSI
 from indicator import stopCalculator
 import setup
 
-TIME = "1 month ago UTC+3"
+TIME = "2 week ago UTC+3"
 BLACKLIST = ['DOWN','UP','PAXGUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT','BEAR','BULL']
 BUY_SYMBOLS = []
 
@@ -75,7 +75,6 @@ def buyer():
                     high =[]
                     low = []
                     close=[]
-                    print(x)
                     klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
                     time.sleep(0.2)
                     for entry in klines:
@@ -95,7 +94,6 @@ def buyer():
                                 break
                             msg = x + "\U0001F4C8\nAlış: " + str(round(float(klines[-1][4]),8)).replace(".","\\.") + "\nStop: " + str(stop).replace(".","\\.")
                             setup.bot.send_message(-1001408874432, msg)
-                            print(msg)
                 except BinanceAPIException as e:
                     print('Something went wrong')
                     time.sleep(60)
