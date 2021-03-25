@@ -39,7 +39,7 @@ def macdAndRsiKlineBuy():
         close=[]
         try:
             klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
-            time.sleep(0.2)
+            time.sleep(0.3)
         except BinanceAPIException as e:
             print(e)
             print('Something went wrong')
