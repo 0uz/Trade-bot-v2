@@ -7,7 +7,7 @@ from indicator import MACDEMA
 import setup
 
 connection = Database.create_connection("test.db")
-client2 = Client(config.api_key2, config.api_secret2)
+client2 = Client(config.api_key1, config.api_secret1)
 TIME = "1 month ago UTC+3"
 
 def macdAndRsiKlineSell():

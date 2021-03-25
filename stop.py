@@ -7,7 +7,7 @@ from indicator import stopCalculator
 
 
 connection = Database.create_connection("test.db")
-client3 = Client(config.api_key3, config.api_secret3)
+client3 = Client(config.api_key1, config.api_key1)
 TIME = "1 month ago UTC+3"
 
 def stopsUpdate():
