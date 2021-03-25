@@ -4,6 +4,7 @@ from binance.client import Client
 from binance.client import BinanceAPIException
 import config
 import time
+import requests
 from indicator import MACDEMA
 from indicator import RSI
 from indicator import stopCalculator
@@ -74,6 +75,7 @@ def buyer():
                     high =[]
                     low = []
                     close=[]
+                    print(x)
                     klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
                     time.sleep(0.2)
                     for entry in klines:
@@ -99,5 +101,8 @@ def buyer():
                     time.sleep(60)
                     client1 = Client(config.api_key1, config.api_secret1)
                     continue
+                except requests.exceptions.ConnectTimeout:
+                    print("timeout")
+                    pass
         else:
             time.sleep(60)
