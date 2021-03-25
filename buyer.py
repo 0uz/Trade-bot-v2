@@ -1,6 +1,7 @@
 import numpy
 import Database
 from binance.client import Client
+from binance.client import BinanceAPIException
 import config
 import time
 from indicator import MACDEMA
@@ -31,12 +32,20 @@ def fillSymbols():
                     BUY_SYMBOLS.append(x['symbol'])
 
 def macdAndRsiKlineBuy():
+    global client1 
     for x in BUY_SYMBOLS:
         high =[]
         low = []
         close=[]
-        klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
-        time.sleep(0.2)
+        try:
+            klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
+            time.sleep(0.2)
+        except BinanceAPIException as e:
+            print(e)
+            print('Something went wrong')
+            time.sleep(60)
+            client1 = Client(config.api_key1, config.api_secret1)
+            continue
         for entry in klines:
             high.append(float(entry[2]))
             low.append(float(entry[3]))

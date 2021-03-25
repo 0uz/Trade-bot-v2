@@ -1,3 +1,4 @@
+from binance.exceptions import BinanceAPIException
 import Database
 from binance.client import Client
 import config
@@ -11,10 +12,18 @@ TIME = "1 month ago UTC+3"
 
 def macdAndRsiKlineSell():
     SYMBOLS = Database.getOpenOrder(connection)
+    global client2 
     for x in SYMBOLS:
         close=[]
-        klines = client2.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
-        time.sleep(0.2)
+        try:
+            klines = client2.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+            time.sleep(0.2)
+        except BinanceAPIException as e:
+            print(e)
+            print('Something went wrong')
+            time.sleep(60)
+            client2 = Client(config.api_key1, config.api_secret1)
+            continue
         if len(klines) > 26:
             for entry in klines:
                 close.append(float(entry[4]))

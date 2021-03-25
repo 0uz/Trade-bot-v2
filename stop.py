@@ -1,3 +1,4 @@
+from binance.exceptions import BinanceAPIException
 import Database
 import config
 import time
@@ -10,12 +11,20 @@ TIME = "1 month ago UTC+3"
 
 def stopsUpdate():
     SYMBOLS = Database.getOpenOrder(connection)
+    global client3
     for x in SYMBOLS:
         high =[]
         low = []
         close=[]
-        klines = client3.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
-        time.sleep(0.2)
+        try:
+            klines = client3.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+            time.sleep(0.2)
+        except BinanceAPIException as e:
+            print(e)
+            print('Something went wrong')
+            time.sleep(60)
+            client3 = Client(config.api_key1, config.api_secret1)
+            continue
         for entry in klines:
             high.append(float(entry[2]))
             low.append(float(entry[3]))
