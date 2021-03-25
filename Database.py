@@ -117,8 +117,8 @@ def profit24HTele(conn):
         if x[3]/1000 > time.time()-86400:
             totalProf += ((x[2]*100)/x[1])-100
             rowCount+=1
+    if rowCount==0: return "Son 1 günde satış gerçekleşmemiş"
     totalProf = totalProf/rowCount
-    if totalProf==0: return "Satış gerçekleşmemiş"
     if totalProf > 0:
         return "\U00002B061 Günlük Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
     else:
