@@ -111,7 +111,6 @@ def profit24HTele(conn):
     cur = conn.cursor()
     cur.execute('SELECT symbol,openPrice,closePrice,closeTime FROM orders where selled = 1')
     rows = cur.fetchall()
-    if len(rows)==0: return "Satış gerçekleşmemiş"
     totalProf = 0
     rowCount = 0
     for x in rows:
@@ -119,6 +118,7 @@ def profit24HTele(conn):
             totalProf += ((x[2]*100)/x[1])-100
             rowCount+=1
     totalProf = totalProf/rowCount
+    if totalProf==0: return "Satış gerçekleşmemiş"
     if totalProf > 0:
         return "\U00002B061 Günlük Ortalama kazanç: %" + str(round(totalProf,4)).replace(".", "\\.").replace('-','\\-')
     else:
