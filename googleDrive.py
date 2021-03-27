@@ -66,4 +66,4 @@ def upload():
     while True:
         print("Backup Alindi")
         uploadFile()
-        time.sleep(43200)
+        time.sleep(21600)
