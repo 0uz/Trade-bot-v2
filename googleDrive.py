@@ -1,5 +1,8 @@
+from http.client import responses
+from inspect import getfile
 import pickle
 import os
+import io
 from google_auth_oauthlib.flow import Flow, InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
@@ -62,8 +65,37 @@ def uploadFile():
     upload = MediaFileUpload('test.db',mimetype=mime_type)
     service.files().create(body=file_metadata,media_body=upload,fields='id').execute()
 
+def getID():
+    API_NAME = 'drive'
+    API_VERSION = 'v3'
+    SCOPES = ['https://www.googleapis.com/auth/drive']
+    id = '19QrYgTBw3S3s2Qypqb6WaUtfDagA0QLY'
+    que = f"parents = '{id}'"
+    service = Create_Service('credentials.json',API_NAME,API_VERSION,SCOPES)
+    a = service.files().list(q=que,orderBy='modifiedTime desc').execute()
+    file = a.get('files')
+    return file[0]['id']
+
+def downloadData():
+    API_NAME = 'drive'
+    API_VERSION = 'v3'
+    SCOPES = ['https://www.googleapis.com/auth/drive']
+    id = getID()
+    service = Create_Service('credentials.json',API_NAME,API_VERSION,SCOPES)
+    req = service.files().get_media(fileId=id)
+    fh = io.BytesIO()
+    downloader = MediaIoBaseDownload(fd=fh,request=req)
+    done = False
+    while not done:
+        status, done = downloader.next_chunk()
+        print('Download progress {0}'.format(status.progress()*100))
+    fh.seek(0)
+    with open (os.path.join('./','test.db'),'wb') as f:
+        f.write(fh.read())
+        f.close()
+
 def upload():
     while True:
         print("Backup Alindi")
         uploadFile()
-        time.sleep(21600)
+        time.sleep(21555)

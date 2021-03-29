@@ -17,16 +17,22 @@ if __name__ == '__main__':
     stops = Process(target=stop.stopTracker)
     tele = Thread(target=telegram.pool)
     drive = Process(target=googleDrive.upload)
+    driveDown = Process(target=googleDrive.downloadData)
 
+    driveDown.start()
+    driveDown.join()
+
+    drive.start()
     tele.start()
     buy.start()
     sell.start()
     stops.start()
-    drive.start()
     
+
+    drive.join()
     buy.join()
     sell.join()
     stops.join()
-    drive.join()
+    
     
  
