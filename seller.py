@@ -19,7 +19,7 @@ def seller():
             SYMBOLS = Database.getOpenOrder(connection)
             for x in SYMBOLS:
                 try:
-                    time.sleep(0.2)
+                    time.sleep(0.3)
                     klines = client2.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
                     if len(klines) > 26:
                         close=[]

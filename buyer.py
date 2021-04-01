@@ -43,7 +43,7 @@ def buyer():
                     high =[]
                     low = []
                     close=[]
-                    time.sleep(0.2)
+                    time.sleep(0.3)
                     klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
                     for entry in klines:
                         high.append(float(entry[2]))
