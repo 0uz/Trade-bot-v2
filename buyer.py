@@ -63,11 +63,11 @@ def buyer():
                             msg = x + "\U0001F4C8\nAlış: " + str(round(float(klines[-1][4]),8)).replace(".","\\.") + "\nStop: " + str(stop).replace(".","\\.")
                             setup.bot.send_message(-1001408874432, msg)
                 except BinanceAPIException as e:
-                    print('Something went wrong')
+                    print('Something went wrong in buyer')
                     time.sleep(60)
                     client1 = Client(config.api_key1, config.api_secret1)
                     continue
-                except requests.exceptions.ConnectTimeout:
+                except requests.exceptions.ReadTimeout:
                     print("timeout")
                     pass
         else:

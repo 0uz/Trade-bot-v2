@@ -31,11 +31,11 @@ def stopTracker():
                         order = (stopPrice,x[0],close[-1])
                         Database.updateStopPrice(connection,order)
                 except BinanceAPIException as e:
-                    print('Something went wrong')
+                    print('Something went wrong in stoper')
                     time.sleep(60)
                     client3 = Client(config.api_key1, config.api_secret1)
                     continue
-                except requests.exceptions.ConnectTimeout:
+                except requests.exceptions.ReadTimeout:
                     print("timeout")
                     pass
             time.sleep(3600)

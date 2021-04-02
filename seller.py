@@ -39,11 +39,11 @@ def seller():
                             msg = x[1]+ "\U0001F534 Stop: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.") + Database.profitCalc(connection,x[0])
                             setup.bot.send_message(-1001408874432, msg)
                 except BinanceAPIException as e:
-                    print('Something went wrong')
+                    print('Something went wrong in seller')
                     time.sleep(60)
                     client2 = Client(config.api_key1, config.api_secret1)
                     continue
-                except requests.exceptions.ConnectTimeout:
+                except requests.exceptions.ReadTimeout:
                     print("timeout")
                     pass
         else:
