@@ -35,7 +35,7 @@ def stopTracker():
                     time.sleep(60)
                     client3 = Client(config.api_key1, config.api_secret1)
                     continue
-                except requests.exceptions.ConnectTimeout:
+                except requests.exceptions.Timeout:
                     print("timeout")
                     pass
             time.sleep(3600)
