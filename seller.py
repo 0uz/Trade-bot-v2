@@ -43,7 +43,7 @@ def seller():
                     time.sleep(60)
                     client2 = Client(config.api_key1, config.api_secret1)
                     continue
-                except requests.exceptions.ReadTimeout:
+                except requests.exceptions.ConnectTimeout:
                     print("timeout")
                     pass
         else:
