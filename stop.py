@@ -11,7 +11,7 @@ TIME = "2 day ago UTC+3"
 
 def stopTracker():
     print("Stop Tracker is working...")
-    client3 = Client(config.api_key1, config.api_key1)
+    client3 = Client(config.api_key3, config.api_key3)
     while True:
         if Database.count_open_orders(connection)>0:
             SYMBOLS = Database.getOpenOrder(connection)

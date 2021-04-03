@@ -13,7 +13,7 @@ TIME = "2 week ago UTC+3"
 
 def seller():
     print("Seller is working...")
-    client2 = Client(config.api_key1, config.api_secret1)
+    client2 = Client(config.api_key2, config.api_secret2)
     while True:
         if Database.count_open_orders(connection) > 0:
             SYMBOLS = Database.getOpenOrder(connection)
