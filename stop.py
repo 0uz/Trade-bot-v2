@@ -37,7 +37,7 @@ def stopTracker():
                     continue
                 except requests.exceptions.Timeout:
                     print("timeout")
-                    pass
+                    continue
             time.sleep(3600)
         else:
             time.sleep(60)

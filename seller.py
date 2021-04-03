@@ -45,6 +45,6 @@ def seller():
                     continue
                 except requests.exceptions.Timeout:
                     print("timeout")
-                    pass
+                    continue
         else:
             time.sleep(20)
