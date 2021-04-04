@@ -33,10 +33,12 @@ def stopTracker():
                 except BinanceAPIException as e:
                     print('Something went wrong in stoper')
                     time.sleep(60)
-                    client3 = Client(config.api_key1, config.api_secret1)
+                    client3 = Client(config.api_key3, config.api_secret3)
                     continue
-                except requests.exceptions:
-                    print("timeout")
+                except:
+                    print("unexpected error")
+                    time.sleep(60)
+                    client3 = Client(config.api_key3, config.api_secret3)
                     continue
             time.sleep(3600)
         else:

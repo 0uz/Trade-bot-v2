@@ -41,10 +41,12 @@ def seller():
                 except BinanceAPIException as e:
                     print('Something went wrong in seller')
                     time.sleep(60)
-                    client2 = Client(config.api_key1, config.api_secret1)
+                    client2 = Client(config.api_key2, config.api_secret2)
                     continue
-                except requests.exceptions:
-                    print("timeout")
+                except:
+                    print("unexpected error")
+                    time.sleep(60)
+                    client2 = Client(config.api_key2, config.api_secret2)
                     continue
         else:
             time.sleep(20)

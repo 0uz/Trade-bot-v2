@@ -67,8 +67,10 @@ def buyer():
                     time.sleep(60)
                     client1 = Client(config.api_key1, config.api_secret1)
                     continue
-                except requests.exceptions:
-                    print("timeout")
+                except:
+                    print("unexpected error")
+                    time.sleep(60)
+                    client1 = Client(config.api_key1, config.api_secret1)
                     continue
         else:
             time.sleep(60)
