@@ -8,7 +8,6 @@ import requests
 from indicator import MACDEMA
 from indicator import RSI
 from indicator import stopCalculator
-from indicator import sellATR
 import setup
 
 TIME = "3 week ago UTC+3"
