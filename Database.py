@@ -20,8 +20,8 @@ def create_table(conn, create_table_sql):
         print(e)
 
 def create_buy_order(conn, order):
-    sql = '''INSERT INTO orders(symbol,openPrice,openTime,stopPrice,lastStopUpdate)
-              VALUES(?,?,?,?,?) '''
+    sql = '''INSERT INTO orders(symbol,openPrice,openTime,stopPrice,sellPriceATR,lastStopUpdate)
+              VALUES(?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, order)
     conn.commit()
@@ -36,7 +36,7 @@ def count_open_orders(conn):
 
 def getOpenOrder(conn):
     cur = conn.cursor()
-    cur.execute("SELECT id,symbol,stopPrice FROM orders where selled = 0")
+    cur.execute("SELECT id,symbol,stopPrice,sellPriceATR,closeTime FROM orders where selled = 0")
     rows = cur.fetchall()
     return rows
 
@@ -158,13 +158,14 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS orders(
                                     closePrice real DEFAULT NULL,
                                     closeTime integer DEFAULT NULL,
                                     stopPrice integer NOT NULL,
+                                    sellPriceATR integer NOT NULL,
                                     lastStopUpdate integer NOT NULL,
                                     selled integer NOT NULL DEFAULT 0
                                 );"""
 
 drop_table = """DROP TABLE orders"""
-
 #con = create_connection("test.db")
+#create_table(con,sql_create_table)
 #order = (0.0103499,1616635108,76)
 #sellOrder(con,order)
 #create_buy_order(con,order)

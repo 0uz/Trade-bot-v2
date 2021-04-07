@@ -48,5 +48,6 @@ def cci(high, low, close):
 
 def stopCalculator(high,low,close):
     atr = talib.ATR(numpy.asarray(high),numpy.asarray(low),numpy.asarray(close), timeperiod=14)
-    stop = close[-1]-(3*atr[-1])
-    return round(stop,8)
+    stop = close[-1]-(1.5*atr[-1])
+    sell = close[-1]+(10*atr[-1])
+    return round(stop,8),round(sell,8)  

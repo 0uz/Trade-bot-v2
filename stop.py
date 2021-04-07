@@ -7,7 +7,7 @@ from binance.client import Client
 from indicator import stopCalculator
 
 connection = Database.create_connection("test.db")
-TIME = "2 day ago UTC+3"
+TIME = "3 day ago UTC+3"
 
 def stopTracker():
     print("Stop Tracker is working...")
@@ -21,7 +21,7 @@ def stopTracker():
                     low = []
                     close=[]
                     time.sleep(0.3)
-                    klines = client3.get_historical_klines(x[1], Client.KLINE_INTERVAL_1HOUR, TIME)
+                    klines = client3.get_historical_klines(x[1], Client.KLINE_INTERVAL_4HOUR, TIME)
                     for entry in klines:
                         high.append(float(entry[2]))
                         low.append(float(entry[3]))

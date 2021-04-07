@@ -8,9 +8,10 @@ import requests
 from indicator import MACDEMA
 from indicator import RSI
 from indicator import stopCalculator
+from indicator import sellATR
 import setup
 
-TIME = "2 week ago UTC+3"
+TIME = "3 week ago UTC+3"
 BLACKLIST = ['DOWN','UP','PAXGUSDT','PAXUSDT','BCCUSDT','VENUSDT','BCHABC','TRY','PERPUSDT','BEAR','BULL']
 BUY_SYMBOLS = []
 
@@ -44,7 +45,7 @@ def buyer():
                     low = []
                     close=[]
                     time.sleep(0.3)
-                    klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_1HOUR, TIME)
+                    klines = client1.get_historical_klines(x, Client.KLINE_INTERVAL_4HOUR, TIME)
                     for entry in klines:
                         high.append(float(entry[2]))
                         low.append(float(entry[3]))
@@ -55,8 +56,8 @@ def buyer():
                         macdBuy, signalSell, macd, signal = MACDEMA(close)
                         if macdBuy and rsiBuy:
                             if Database.count_open_orders(connection)<10 and (not Database.isExist(connection,x)):
-                                stop = stopCalculator(high,low,close)
-                                order =(x,klines[-1][4],klines[-1][0]/1000,stop,klines[-1][4])
+                                stop,sell = stopCalculator(high,low,close)
+                                order =(x,klines[-1][4],klines[-1][0]/1000,stop,sell,klines[-1][4])
                                 Database.create_buy_order(connection,order)
                             else:
                                 break
