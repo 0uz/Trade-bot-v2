@@ -35,11 +35,11 @@ def stopTracker():
                     time.sleep(60)
                     client3 = Client(config.api_key3, config.api_secret3)
                     continue
-                #except:
-                #    print("unexpected error")
-                #    time.sleep(60)
-                #    client3 = Client(config.api_key3, config.api_secret3)
-                #    continue
+                except:
+                    print("unexpected error in stop")
+                    time.sleep(60)
+                    client3 = Client(config.api_key3, config.api_secret3)
+                    continue
             time.sleep(3600)
         else:
             time.sleep(60)
