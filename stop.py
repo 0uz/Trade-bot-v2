@@ -27,7 +27,7 @@ def stopTracker():
                         low.append(float(entry[3]))
                         close.append(float(entry[4]))
                     if close[-1] > Database.getLastPrice(connection,x[0]):
-                        stopPrice =stopCalculator(high,low,close)
+                        stopPrice,sell =stopCalculator(high,low,close)
                         order = (stopPrice,x[0],close[-1])
                         Database.updateStopPrice(connection,order)
                 except BinanceAPIException as e:
@@ -35,11 +35,11 @@ def stopTracker():
                     time.sleep(60)
                     client3 = Client(config.api_key3, config.api_secret3)
                     continue
-                except:
-                    print("unexpected error")
-                    time.sleep(60)
-                    client3 = Client(config.api_key3, config.api_secret3)
-                    continue
+                #except:
+                #    print("unexpected error")
+                #    time.sleep(60)
+                #    client3 = Client(config.api_key3, config.api_secret3)
+                #    continue
             time.sleep(3600)
         else:
             time.sleep(60)
