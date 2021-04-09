@@ -163,7 +163,7 @@ sql_create_table = """CREATE TABLE IF NOT EXISTS orders(
                                     selled integer NOT NULL DEFAULT 0
                                 );"""
 
-drop_table = """DROP TABLE orders"""
+#drop_table = """DROP TABLE orders"""
 #con = create_connection("test.db")
 #create_table(con,sql_create_table)
 #order = (0.0103499,1616635108,76)

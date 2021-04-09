@@ -49,22 +49,23 @@ def seller():
                         #cciBuy, cciSell,invcci = cci(close)
                         stop = close[-1] < x[2]
                         sell = close[-1] >= x[3]
+                    
                         if macdSell:
-                            timeClose = display_time(time.time()-(x[4]/1000))
+                            timeClose = display_time(int(time.time())-x[4])
                             order = (klines[-1][4],klines[-1][0],x[0])
                             Database.sellOrder(connection,order)
                             msg = x[1] + "\U0001F4B0 Satış: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.") + Database.profitCalc(connection,x[0]) + "\n" + timeClose
                             setup.bot.send_message(-1001408874432, msg)
                             continue
                         if stop:
-                            timeClose = display_time(time.time()-(x[4]/1000))
+                            timeClose = display_time(int(time.time())-x[4])
                             order = (klines[-1][4],klines[-1][0],x[0])
                             Database.sellOrder(connection,order)
                             msg = x[1]+ "\U0001F534 Stop: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.") + Database.profitCalc(connection,x[0]) + "\n" + timeClose
                             setup.bot.send_message(-1001408874432, msg)
                             continue
                         if sell:
-                            timeClose = display_time(time.time()-(x[4]/1000))
+                            timeClose = display_time(int(time.time())-x[4])
                             order = (klines[-1][4],klines[-1][0],x[0])
                             Database.sellOrder(connection,order)
                             msg = x[1]+ "\U0001F4B8 Satış: " + str(round(float(klines[-1][4]),8)).replace(".", "\\.") + Database.profitCalc(connection,x[0]) + "\n" + timeClose
