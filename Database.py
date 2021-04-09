@@ -36,7 +36,7 @@ def count_open_orders(conn):
 
 def getOpenOrder(conn):
     cur = conn.cursor()
-    cur.execute("SELECT id,symbol,stopPrice,sellPriceATR,closeTime FROM orders where selled = 0")
+    cur.execute("SELECT id,symbol,stopPrice,sellPriceATR,openTime FROM orders where selled = 0")
     rows = cur.fetchall()
     return rows
 
