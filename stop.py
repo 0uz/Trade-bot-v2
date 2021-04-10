@@ -3,6 +3,7 @@ import Database
 import config
 import time
 import requests
+import setup
 from binance.client import Client
 from indicator import stopCalculator
 
@@ -36,6 +37,7 @@ def stopTracker():
                     client3 = Client(config.api_key3, config.api_secret3)
                     continue
                 except:
+                    setup.bot.send_message(923698949, 'Stop error')
                     print("unexpected error in stop")
                     time.sleep(60)
                     client3 = Client(config.api_key3, config.api_secret3)

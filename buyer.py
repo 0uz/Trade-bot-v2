@@ -68,6 +68,7 @@ def buyer():
                     client1 = Client(config.api_key1, config.api_secret1)
                     continue
                 except:
+                    setup.bot.send_message(923698949, 'Buyer error')
                     print("unexpected error in buyer")
                     time.sleep(60)
                     client1 = Client(config.api_key1, config.api_secret1)

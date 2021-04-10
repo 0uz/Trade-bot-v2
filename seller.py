@@ -78,6 +78,7 @@ def seller():
                     client2 = Client(config.api_key2, config.api_secret2)
                     continue
                 except:
+                    setup.bot.send_message(923698949, 'Seller error')
                     print("unexpected error in seller")
                     time.sleep(60)
                     client2 = Client(config.api_key2, config.api_secret2)
