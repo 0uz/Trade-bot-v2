@@ -77,10 +77,10 @@ def seller():
                     time.sleep(60)
                     client2 = Client(config.api_key2, config.api_secret2)
                     continue
-                #except:
-                #    print("unexpected error in seller")
-                #    time.sleep(60)
-                #    client2 = Client(config.api_key2, config.api_secret2)
-                #    continue
+                except:
+                    print("unexpected error in seller")
+                    time.sleep(60)
+                    client2 = Client(config.api_key2, config.api_secret2)
+                    continue
         else:
             time.sleep(20)
